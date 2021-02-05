@@ -1,0 +1,99 @@
+// 使用rem结合vw来做移动端适配，推荐px2rem+插件，设置200
+html {
+  font-size: 100vw * 100/375;
+  font-family: 'ALKATIP Basma Tom';
+  line-height: 1.5;
+}
+
+@font-face {
+  font-family: 'ALKATIP Basma Tom';
+  src: url('~@/styles/font/UKIJTor.ttf');
+}
+
+@font-face {
+  font-family: 'NUM';
+  src: url('../assets/fonts/Fester Heavy.ttf');
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.NUM {
+  font-family: 'NUM';
+}
+
+.HANYU {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+
+.fishbones,
+.is-scrolling-none {
+  &::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 0.75rem;
+    box-shadow: inset 0 0 0.25rem rgba($color: #006699, $alpha: 0.3);
+    background: rgba($color: #006699, $alpha: 0.3);
+  }
+
+  &::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow: inset 0 0 0.25rem rgba($color: #006699, $alpha: 0.3);
+    border-radius: 0.75rem;
+    background: rgba($color: #006699, $alpha: 0.3);
+  }
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: 0 !important;
+  scrollbar-color: transparent transparent;
+  scrollbar-track-color: transparent;
+  -ms-scrollbar-track-color: transparent;
+}
+
+.scrolling-none {
+  &::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 0.75rem;
+    box-shadow: inset 0 0 0.25rem rgba($color: #006699, $alpha: 0.3);
+    background: rgba($color: #006699, $alpha: 0.3);
+  }
+
+  &::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow: inset 0 0 0.25rem rgba($color: #006699, $alpha: 0.3);
+    border-radius: 0.75rem;
+    background: rgba($color: #006699, $alpha: 0.3);
+  }
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: 0 !important;
+  scrollbar-color: transparent transparent;
+  scrollbar-track-color: transparent;
+  -ms-scrollbar-track-color: transparent;
+}
+
+html {
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style: none;
+  /*火狐下隐藏滚动条*/
+  overflow: -moz-scrollbars-none;
+}
+
+/*Chrome下隐藏滚动条，溢出可以透明滚动*/
+::-webkit-scrollbar {
+  width: 0px;
+}

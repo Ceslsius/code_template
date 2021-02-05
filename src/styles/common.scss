@@ -1,0 +1,33 @@
+html {
+  font-size: 15px;
+}
+
+.tk-text-df {
+  font-size: 1rem;
+}
+
+// 文字类
+
+// 间距类
+
+// 颜色类
+
+.bg-white {
+  background-color: #fff;
+  color: #333;
+}
+
+.bg-black {
+  background-color: #333;
+  @include name();
+}
+
+@mixin name {
+}
+
+.color-white {
+  color: #ffffff;
+}
+
+// .bg-main {
+// }
