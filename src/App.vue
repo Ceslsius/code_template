@@ -2,22 +2,108 @@
  * @Descripttion: 
  * @Author: Yi Yunwan
  * @Date: 2020-09-04 10:59:42
- * @LastEditors: Yi Yunwan
- * @LastEditTime: 2020-09-04 16:32:46
+ * @LastEditors: Zhang Yunzhong
+ * @LastEditTime: 2021-03-01 11:45:01
 -->
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <block>
+    <div class="loadMask" v-if="loadMaskShow"></div>
+    <div
+      id="app"
+      :style="
+        titleShow
+          ? 'padding-top: 44px;padding-top: calc(constant(safe-area-inset-top) + 44px);padding-top: calc(env(safe-area-inset-top) + 44px);'
+          : 'padding-top: 0;'
+      "
+    >
+      <div class="title" v-if="titleShow">
+        <div class="backBtn" @click="backBtn"></div>
+        <div class="word">H5标题栏</div>
+      </div>
+      <router-view />
+    </div>
+  </block>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { StoreModule } from '@/store/modules/store'
+import { handleGetNowVersion } from '@/utils/index'
+import { callAppFunc_IsHiddenNavagationBar, callAppFunc_UpdateNavTitle, callAppFunc_BackBtnCallback } from '@/utils/bridge'
 @Component({
   name: 'App'
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  // 兼容3.1以下版本展示客户端标题栏
+  get titleShow() {
+    return handleGetNowVersion(StoreModule.appVersion) >= 310
+  }
+  @Watch('titleShow', {
+    immediate: true,
+    deep: true
+  })
+  onChangeTest(value: string, oldValue: string) {
+    if (value) {
+      callAppFunc_IsHiddenNavagationBar(true)
+    } else {
+      callAppFunc_IsHiddenNavagationBar(false)
+      callAppFunc_UpdateNavTitle('客户端标题栏')
+    }
+  }
+  // 页面未加载完成时展示遮罩层
+  get loadMaskShow() {
+    return StoreModule.loadMaskShow
+  }
+  /**
+   * 返回按钮的点击事件，调用客户端WebView的返回方法
+   * @param {*}
+   */
+  backBtn() {
+    callAppFunc_BackBtnCallback()
+  }
+  /**
+   * 兼容以前的使用客户端标题栏的页面,在退出时显示客户端标题栏
+   * @param {*}
+   */
+  beforeDestroy() {
+    callAppFunc_IsHiddenNavagationBar(false)
+  }
+}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.loadMask {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+#app {
+  .title {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 44px;
+    height: calc(constant(safe-area-inset-top) + 44px);
+    height: calc(env(safe-area-inset-top) + 44px);
+    background: orange;
+    .backBtn {
+      position: absolute;
+      left: 0;
+      width: 44px;
+      height: 100%;
+      background: black;
+    }
+    .word {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 44px;
+      font-size: 20px;
+    }
+  }
+}
+</style>

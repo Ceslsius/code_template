@@ -2,8 +2,8 @@
  * @Descripttion:
  * @Author: Yi Yunwan
  * @Date: 2020-09-04 10:59:42
- * @LastEditors: Yi Yunwan
- * @LastEditTime: 2020-10-26 11:35:48
+ * @LastEditors: Zhang Yunzhong
+ * @LastEditTime: 2021-03-01 12:18:45
  */
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
@@ -18,13 +18,11 @@ const routes: Array<RouteConfig> = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/test',
+    name: 'test',
+    component: () => import(/* webpackChunkName: "test" */ '../views/test.vue')
   }
 ]
-
 const router = new VueRouter({
   routes
 })

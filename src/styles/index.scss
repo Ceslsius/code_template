@@ -1,8 +1,21 @@
-// 使用rem结合vw来做移动端适配，推荐px2rem+插件，设置200
 html {
-  font-size: 100vw * 100/375;
+  font-size: 100vw * 16/375;
   font-family: 'ALKATIP Basma Tom';
   line-height: 1.5;
+}
+
+div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  &:before,
+  &:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
@@ -12,7 +25,7 @@ html {
 
 @font-face {
   font-family: 'NUM';
-  src: url('../assets/fonts/Fester Heavy.ttf');
+  src: url('~@/styles/font/Fester Heavy.ttf');
 }
 
 img {

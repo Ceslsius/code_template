@@ -1,4 +1,12 @@
-# king
+<!--
+ * @Descripttion:
+ * @Author: Zhang Yunzhong
+ * @Date: 2021-02-05 14:15:08
+ * @LastEditors: Zhang Yunzhong
+ * @LastEditTime: 2021-02-20 17:49:21
+-->
+
+# code template
 
 ## Project setup
 
@@ -21,7 +29,7 @@ npm run build
 ### Compiles and minifies for development
 
 ```
-npm run test
+npm run dev
 ```
 
 ### Lints and fixes files
