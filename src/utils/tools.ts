@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-02-08 14:25:51
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-01 11:18:46
+ * @LastEditTime: 2021-03-16 11:20:07
  */
 import { apiGetProductList, apiGetSignUpInfo, apiGetRulesProductList } from '@/api/index'
 import { filterRulerId, fifterMoney } from '@/utils/index'
@@ -24,8 +24,13 @@ export async function getProductList(): Promise<any> {
   } = productInfo
   if (state === 300000 && sub_state === 300001) {
     _productList = product.filter((item: any) => {
-      //过滤签到/活动/兑换产品包
-      if (!item.product_id.includes('single') && !item.product_id.includes('activity') && !item.product_id.includes('exchange')) {
+      //过滤产品包
+      if (
+        item.product_id === 'android_vip_month' ||
+        item.product_id === 'android_vip_3month' ||
+        item.product_id === 'android_vip_6month' ||
+        item.product_id === 'android_vip_year'
+      ) {
         return item
       }
     })
