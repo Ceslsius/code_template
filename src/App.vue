@@ -3,10 +3,10 @@
  * @Author: Yi Yunwan
  * @Date: 2020-09-04 10:59:42
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-01 11:45:01
+ * @LastEditTime: 2021-04-13 17:08:14
 -->
 <template>
-  <block>
+  <div>
     <div class="loadMask" v-if="loadMaskShow"></div>
     <div
       id="app"
@@ -22,7 +22,7 @@
       </div>
       <router-view />
     </div>
-  </block>
+  </div>
 </template>
 
 <script lang="ts">
