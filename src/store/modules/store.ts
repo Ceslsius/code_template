@@ -3,7 +3,7 @@
  * @Author: Yi Yunwan
  * @Date: 2021-01-12 11:19:10
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-01 10:52:42
+ * @LastEditTime: 2021-04-28 11:17:24
  */
 import { Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import store from '@/store'
@@ -93,6 +93,7 @@ class Store extends BaseModule {
       const res = await callAppFunc_getSomeParams()
       if (res.userId) {
         this.setUserId(res.userId)
+        this.setToken(res.tocken)
         this.setLogin(true)
         const res1: any = await apiGetUserInfo({
           nns_user_id: res.userId,
@@ -101,7 +102,6 @@ class Store extends BaseModule {
         })
         console.log(res1)
       }
-      this.setToken(res.tocken)
       this.setDeviceId(res.deviceId)
       this.setAppVersion(res.version)
     } catch (error) {
@@ -118,14 +118,14 @@ class Store extends BaseModule {
       const res = await getProductList()
       this.setProductList(res)
     } catch (error) {
-      console.error('获取用户信息错误', error)
+      console.error('获取基础产品包错误', error)
     }
     // 获取签约信息
     try {
       const res = await getSignInfo()
       this.setSign(res)
     } catch (error) {
-      console.error('获取用户信息错误', error)
+      console.error('获取签约信息错误', error)
     }
     // 获取折扣套餐
     try {
@@ -140,7 +140,7 @@ class Store extends BaseModule {
       this.setAllProductList(res)
       console.log('全部产品包', res)
     } catch (error) {
-      console.error('获取折扣套餐错误', error)
+      console.error('融合产品包错误', error)
     }
     // 调用刷新方法
     // await this.Refresh()

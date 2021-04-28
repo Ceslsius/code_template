@@ -3,7 +3,7 @@
  * @Author: Yi Yunwan
  * @Date: 2020-09-04 15:11:43
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-02-08 11:31:12
+ * @LastEditTime: 2021-04-28 11:21:08
  */
 import service from '@/utils/http'
 import { baseURL } from '@/config'
@@ -59,6 +59,20 @@ export function apiGetRulesProductList(
   product: any
 }> {
   return service.get(baseURL + '/nn_cms/nn_cms_view/xjcbc/n219_a.php?nns_func=scaaa_get_product_discount_list&nns_output_type=json', {
+    params
+  })
+}
+
+/**
+ * 获取自动续费订单列表
+ */
+export function apiGetAutoRenewOrderList(
+  params: any = {}
+): IRes<{
+  result: any
+  product: any
+}> {
+  return service.get(baseURL + '/nn_cms/nn_cms_view/xjcbc/n219_a.php?nns_func=scaaa_get_auto_renew_order_list&nns_output_type=json', {
     params
   })
 }

@@ -3,9 +3,9 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-02-08 14:25:51
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-16 11:20:07
+ * @LastEditTime: 2021-04-28 11:25:17
  */
-import { apiGetProductList, apiGetSignUpInfo, apiGetRulesProductList } from '@/api/index'
+import { apiGetProductList, apiGetRulesProductList, apiGetAutoRenewOrderList } from '@/api/index'
 import { filterRulerId, fifterMoney } from '@/utils/index'
 import { StoreModule } from '@/store/modules/store'
 /**
@@ -43,15 +43,21 @@ export async function getProductList(): Promise<any> {
  * @returns {Promise<boolean>} 是否是签约用户
  */
 export async function getSignInfo(): Promise<boolean> {
-  const signUpInfo: any = await apiGetSignUpInfo({
+  const AutoList: any = await apiGetAutoRenewOrderList({
     nns_user_id: StoreModule.userId,
     nns_version: StoreModule.appVersion,
     nns_webtoken: StoreModule.token
   })
   const {
-    result: { state }
-  } = signUpInfo
-  return state === 0
+    result: { state: states }
+  } = AutoList
+  if (states === 300000) {
+    //自动续费订单
+    const { auto_renew_order_list = [] } = AutoList
+    return auto_renew_order_list.length !== 0
+  } else {
+    return false
+  }
 }
 
 /**
@@ -89,7 +95,6 @@ export async function getRulesProductList(): Promise<any> {
             ruleItem = item
           } else if (enjoy_billing_rule_times && enjoy_billing_rule_times == '1') {
             //第一次购买续费
-            ruleItem = item
             for (let k = j; k < discount_list.length; k++) {
               //进行判断 是否有价格更低的
               const items = discount_list[k]

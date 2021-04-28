@@ -3,11 +3,14 @@
  * @Author: Yi Yunwan
  * @Date: 2020-09-04 10:59:42
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-04-13 17:08:14
+ * @LastEditTime: 2021-04-27 11:59:45
 -->
 <template>
   <div>
-    <div class="loadMask" v-if="loadMaskShow"></div>
+    <div class="loadMask" v-if="loadMaskShow">
+      <div class="loadGif"></div>
+      <div class="loadTxt">يۈكلىنىۋاتىدۇ، تەخىر قىلىڭ</div>
+    </div>
     <div
       id="app"
       :style="
@@ -17,6 +20,7 @@
       "
     >
       <div class="title" v-if="titleShow">
+        <div class="space"></div>
         <div class="backBtn" @click="backBtn"></div>
         <div class="word">H5标题栏</div>
       </div>
@@ -74,12 +78,31 @@ export default class App extends Vue {
 <style lang="scss">
 .loadMask {
   position: fixed;
-  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  background: #fff;
+  z-index: 99999;
+  .loadGif {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 161px;
+    height: 133.5px;
+    background: url('http://kixweb.kixmix.net.cn/sources/img/weChatMini/home/loadgif.gif') no-repeat;
+    background-size: 100% 100%;
+  }
+  .loadTxt {
+    color: #000;
+    font-size: px2rem(24);
+    line-height: px2rem(24);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 #app {
   .title {
@@ -90,16 +113,22 @@ export default class App extends Vue {
     height: calc(constant(safe-area-inset-top) + 44px);
     height: calc(env(safe-area-inset-top) + 44px);
     background: orange;
+    .space {
+      width: 100%;
+      height: 0rpx;
+      height: constant(safe-area-inset-top);
+      height: env(safe-area-inset-top);
+      background: #fff;
+    }
     .backBtn {
       position: absolute;
+      bottom: 0;
       left: 0;
       width: 44px;
-      height: 100%;
+      height: 44px;
       background: black;
     }
     .word {
-      width: 100%;
-      height: 100%;
       text-align: center;
       line-height: 44px;
       font-size: 20px;
