@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-01-12 11:19:10
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-08 10:31:32
+ * @LastEditTime: 2021-05-08 14:58:03
  */
 import { Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import store from '@/store'
@@ -33,10 +33,10 @@ class Store extends BaseModule {
     if (deviceId) this.deviceId = deviceId
   }
   /**版本号 */
-  appVersion = ''
+  version = ''
   @Mutation
-  setAppVersion(appVersion: string) {
-    if (appVersion) this.appVersion = appVersion
+  setVersion(version: string) {
+    if (version) this.version = version
   }
   /**用户token */
   token = ''
@@ -103,7 +103,7 @@ class Store extends BaseModule {
         console.log(res1)
       }
       this.setDeviceId(res.deviceId)
-      this.setAppVersion(res.version)
+      this.setVersion(res.version)
     } catch (error) {
       console.error('获取用户信息错误', error)
     }
@@ -152,25 +152,7 @@ class Store extends BaseModule {
    */
   @Action
   async Refresh() {
-    try {
-      const res = await callAppFunc_getSomeParams()
-      if (res.userId) {
-        this.setLogin(true)
-        const res1: any = await apiGetUserInfo({
-          nns_user_id: res.userId,
-          nns_version: res.version,
-          nns_webtoken: res.tocken
-        })
-        console.log(res1)
-      }
-      this.setToken(res.newToken)
-      this.setUserId(res.userId)
-      this.setDeviceId(res.deviceId)
-      this.setAppVersion(res.version)
-      return true
-    } catch (error) {
-      console.error(error)
-    }
+    // Todo
   }
 }
 

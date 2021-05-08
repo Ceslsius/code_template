@@ -40,7 +40,7 @@ import { callAppFunc_IsHiddenNavagationBar, callAppFunc_UpdateNavTitle, callAppF
 export default class App extends Vue {
   // 兼容3.1以下版本展示客户端标题栏
   get titleShow() {
-    return handleGetNowVersion(StoreModule.appVersion) >= 310
+    return handleGetNowVersion(StoreModule.version) >= 310
   }
   @Watch('titleShow', {
     immediate: true,

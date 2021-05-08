@@ -15,7 +15,7 @@ import { StoreModule } from '@/store/modules/store'
 export async function getProductList(): Promise<any> {
   const productInfo: any = await apiGetProductList({
     nns_user_id: StoreModule.userId || '',
-    nns_version: StoreModule.appVersion || '',
+    nns_version: StoreModule.version || '',
     nns_product_id: 'android_vip_month,android_vip_3month,android_vip_6month,android_vip_year'
   })
   const {
@@ -34,7 +34,7 @@ export async function getProductList(): Promise<any> {
 export async function getSignInfo(): Promise<boolean> {
   const AutoList: any = await apiGetAutoRenewOrderList({
     nns_user_id: StoreModule.userId,
-    nns_version: StoreModule.appVersion,
+    nns_version: StoreModule.version,
     nns_webtoken: StoreModule.token
   })
   const {
@@ -63,7 +63,7 @@ export async function getRulesProductList(): Promise<any> {
       const _a = apiGetRulesProductList({
         nns_product_id: item.product_id,
         nns_user_id: StoreModule.userId,
-        nns_version: StoreModule.appVersion,
+        nns_version: StoreModule.version,
         nns_webtoken: StoreModule.token
       })
       _req.push(_a)
