@@ -1,9 +1,9 @@
 /*
  * @Descripttion:
- * @Author: Yi Yunwan
+ * @Author: Zhang Yunzhong
  * @Date: 2020-12-03 16:29:15
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-02-07 15:31:46
+ * @LastEditTime: 2021-05-08 10:31:08
  */
 declare interface Window {
   WVJBCallbacks: Function[]

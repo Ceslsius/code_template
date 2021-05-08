@@ -1,9 +1,9 @@
 /*
  * @Descripttion:
- * @Author: Yi Yunwan
+ * @Author: Zhang Yunzhong
  * @Date: 2021-01-12 11:18:52
- * @LastEditors: Yi Yunwan
- * @LastEditTime: 2021-01-12 11:18:54
+ * @LastEditors: Zhang Yunzhong
+ * @LastEditTime: 2021-05-08 10:31:25
  */
 import Vue from 'vue'
 import Vuex from 'vuex'

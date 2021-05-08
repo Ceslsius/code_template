@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-02-08 14:25:51
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-04-28 11:25:17
+ * @LastEditTime: 2021-05-08 10:25:09
  */
 import { apiGetProductList, apiGetRulesProductList, apiGetAutoRenewOrderList } from '@/api/index'
 import { filterRulerId, fifterMoney } from '@/utils/index'
@@ -13,28 +13,17 @@ import { StoreModule } from '@/store/modules/store'
  * @returns {Promise<any>} 基础产品包
  */
 export async function getProductList(): Promise<any> {
-  let _productList = [] //基础套餐
   const productInfo: any = await apiGetProductList({
     nns_user_id: StoreModule.userId || '',
-    nns_version: StoreModule.appVersion || ''
+    nns_version: StoreModule.appVersion || '',
+    nns_product_id: 'android_vip_month,android_vip_3month,android_vip_6month,android_vip_year'
   })
   const {
     result: { state, sub_state },
     product = []
   } = productInfo
   if (state === 300000 && sub_state === 300001) {
-    _productList = product.filter((item: any) => {
-      //过滤产品包
-      if (
-        item.product_id === 'android_vip_month' ||
-        item.product_id === 'android_vip_3month' ||
-        item.product_id === 'android_vip_6month' ||
-        item.product_id === 'android_vip_year'
-      ) {
-        return item
-      }
-    })
-    return _productList
+    return product
   }
 }
 

@@ -1,9 +1,9 @@
 /*
  * @Descripttion:
- * @Author: Yi Yunwan
- * @Date: 2020-12-03 16:13:56
- * @LastEditors: Yi Yunwan
- * @LastEditTime: 2020-12-03 16:19:56
+ * @Author: Zhang Yunzhong
+ * @Date: 2021-02-05 14:15:08
+ * @LastEditors: Zhang Yunzhong
+ * @LastEditTime: 2021-05-08 10:30:25
  */
 module.exports = {
   presets: ['@vue/cli-plugin-babel/preset'],
@@ -14,9 +14,9 @@ module.exports = {
       {
         libraryName: 'vant',
         libraryDirectory: 'es',
-        style: true,
+        style: true
       },
-      'vant',
-    ],
-  ],
+      'vant'
+    ]
+  ]
 }
