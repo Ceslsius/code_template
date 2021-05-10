@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-12-03 16:29:15
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-08 10:31:08
+ * @LastEditTime: 2021-05-10 14:12:07
  */
 declare interface Window {
   WVJBCallbacks: Function[]
@@ -30,6 +30,10 @@ declare interface Window {
      * 城市地址
      */
     cname: string
+  }
+  /**百度数据上报方法 */
+  _hmt: {
+    push(value: HmtPushParams): void
   }
 }
 
@@ -101,3 +105,16 @@ type IOldResponse<T = any> = {
 
 type IOldRes<T = any> = Promise<IOldResponse<T>>
 type MayNull<T> = T | null
+interface HmtPushParams extends Array<string | numer> {
+  /**
+   * 事件类型
+   */
+  0: '_trackEvent'
+  /**
+   * 事件名称
+   */
+  1: string
+  2: string
+  3?: string
+  4?: number
+}
