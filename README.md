@@ -1,5 +1,3 @@
-# king
-
 ## Project setup
 
 ```
