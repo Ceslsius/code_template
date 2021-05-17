@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-09-04 10:59:42
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-08 10:30:59
+ * @LastEditTime: 2021-05-17 10:19:09
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -14,6 +14,8 @@ import 'normalize.css'
 import './styles/index.scss'
 import './vant'
 import { useDebug } from './utils'
+import { point } from '@/utils/point'
+Vue.prototype.$point = point
 Vue.prototype.$debug = useDebug()
 Vue.config.productionTip = false
 Vue.use(VueI18n)

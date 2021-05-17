@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-09-08 14:18:50
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-01 15:24:03
+ * @LastEditTime: 2021-05-17 10:32:53
  */
 export function dateFormat(fmt: string, date: Date) {
   const o: any = {
@@ -28,10 +28,14 @@ export function dateFormat(fmt: string, date: Date) {
 
 export function useDebug() {
   // 调试模式的开启控制
-  if (window.location.href.includes('debug=true') || window.navigator.userAgent.includes('debug') || window.KIXMIX_DEBUG) {
+  if (
+    window.location.href.includes('debug=true') ||
+    window.navigator.userAgent.includes('debug') ||
+    window.navigator.userAgent.includes('Debug') ||
+    window.KIXMIX_DEBUG
+  ) {
     window.KIXMIX_DEBUG = true
   }
-
   if (window.KIXMIX_DEBUG) {
     import(/* webpackChunkName: "vconsole" */ 'vconsole').then(value => {
       // 调试模式打开vconsole工具
@@ -40,10 +44,18 @@ export function useDebug() {
     })
   } else {
     // 非调试模式关闭全部打印信息
-    console.log = function() {}
-    console.error = function() {}
-    console.info = function() {}
-    console.warn = function() {}
+    console.log = function() {
+      /* todo */
+    }
+    console.error = function() {
+      /* todo */
+    }
+    console.info = function() {
+      /* todo */
+    }
+    console.warn = function() {
+      /* todo */
+    }
   }
 
   return window.KIXMIX_DEBUG || false
@@ -61,6 +73,14 @@ export function handleGetNowVersion(version: string = '3.1.0') {
       .replace('.', '')
       .replace('.', '')
   )
+}
+
+export function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
 }
 
 export const _utf8_encode = function(string: string) {
@@ -141,7 +161,7 @@ export function filterRulerId(id: string = '') {
  * @param value
  * @returns {string|number}
  */
-export function fifterMoney(value: string = '') {
+export function fifterMoney(value: string = ''): string | number {
   if (!value) return value
   return parseInt(value.split('.').join(''))
 }

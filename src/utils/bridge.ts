@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-02-07 14:44:58
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-01 15:17:03
+ * @LastEditTime: 2021-05-14 14:40:44
  */
 let connectWebViewJavascriptBridge: (callback: (bridge: Window['WebViewJavascriptBridge']) => void) => void
 if (window.location.href.indexOf('iOS') !== -1) {
@@ -246,4 +246,11 @@ export function callAppFunc_JumpWeChat() {
  */
 export function callAppFunc_LoginInfo() {
   return callBridgeAsync('appFunc_LoginInfo', '') as Promise<any>
+}
+/**
+ * 拉取播放穿山甲激励视频(安卓)
+ * @return data 播放回调参数
+ */
+export function callAppFunc_playAdVideo() {
+  return callBridgeAsync('appFunc_playAdVideo', '') as Promise<any>
 }

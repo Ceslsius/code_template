@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-09-04 17:13:23
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-03-02 11:05:26
+ * @LastEditTime: 2021-05-14 17:25:27
  */
 import axios, { AxiosResponse } from 'axios'
 import { Toast } from 'vant'
@@ -35,22 +35,7 @@ service.interceptors.response.use(
   function(response) {
     _log(response)
     // 对响应数据做点什么
-    const data = response.data as IResponse
     return response.data
-    // if (response.status === 200) {
-    //   if (data.code == '200') {
-    //     return response.data
-    //   } else if (data.code == '100003') {
-    //     Toast(data.msg)
-    //     return Promise.reject(data)
-    //   } else {
-    //     Toast(data.msg)
-    //     return Promise.reject(data)
-    //   }
-    // } else {
-    //   Toast(`服务异常【${response.status}】`)
-    //   return Promise.reject(response)
-    // }
   },
   function(error: Error) {
     // 对响应错误做点什么
