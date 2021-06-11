@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-09-04 10:59:42
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-08 10:30:37
+ * @LastEditTime: 2021-05-25 17:56:52
  */
 module.exports = {
   root: true,
@@ -23,6 +23,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'vue/no-unused-vars': 'off',
     'no-useless-escape': 'off',
-    '@typescript-eslint/no-inferrable-types': 'off'
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-var-requires': 'off'
   }
 }

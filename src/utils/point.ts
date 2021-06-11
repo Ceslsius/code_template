@@ -3,14 +3,14 @@
  * @Author: Yi Yunwan
  * @Date: 2020-09-17 14:22:03
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-17 10:25:54
+ * @LastEditTime: 2021-06-11 16:16:51
  */
 
 import axios from 'axios'
 import qs from 'qs'
 import { encode, guid } from './index'
 import { repoetConfig } from '@/config'
-import { UserModule } from '@/store/modules/user'
+import { StoreModule } from '@/store/modules/store'
 const http = axios.create({
   baseURL: repoetConfig.baseURL,
   timeout: 500
@@ -41,18 +41,16 @@ export class Point {
       randomId: guid(),
       device: '',
       deviceType: '',
-      system: '',
+      system: StoreModule.version.includes('iOS') ? 'iOS' : 'Android',
       systemVersion: '',
       network: '',
-      // #ifdef H5
       ip: window.returnCitySN?.cip || '',
       cityAddr: window.returnCitySN?.cname || '',
-      // #endif
-      userId: UserModule.userId,
-      deviceId: UserModule.deviceId,
-      deviceIdV2: UserModule.deviceId,
+      userId: StoreModule.userId,
+      deviceId: StoreModule.deviceId,
+      deviceIdV2: StoreModule.deviceId,
       userType: '',
-      appVersion: UserModule.appVersion,
+      appVersion: StoreModule.version,
       appChannel: '',
       operators: '',
       lang: ''
@@ -94,12 +92,11 @@ export class Point {
     )
     // 需重新获取的数据重新获取
     const commonInfo: Partial<CommonInfo> = {
-      network: UserModule.network,
-      userId: UserModule.userId,
-      deviceId: UserModule.deviceId,
-      deviceIdV2: UserModule.deviceId,
-      userType: UserModule.userType,
-      appVersion: UserModule.appVersion
+      system: StoreModule.version.includes('iOS') ? 'iOS' : 'Android',
+      userId: StoreModule.userId,
+      deviceId: StoreModule.deviceId,
+      deviceIdV2: StoreModule.deviceId,
+      appVersion: StoreModule.version
     }
     // 合并公用字段
     reportData.data.commonInfo = Object.assign({}, reportData.data.commonInfo, commonInfo)
@@ -122,17 +119,7 @@ export class Point {
     eventMap.targetName = eventMap.targetName || '0'
     eventMap.dataMap = eventMap.dataMap || {}
     const data = this.assinReportData(eventMap)
-    // #ifdef H5
     sendData(`${this.config.baseURL}/click`, data)
-    // #endif
-    // #ifndef H5
-    http.request({
-      baseURL: this.config.baseURL,
-      url: '/click',
-      method: 'POST',
-      data
-    })
-    // #endif
   }
 
   /**
@@ -143,17 +130,7 @@ export class Point {
     eventMap.getDataTime = 0
     eventMap.dataMap = eventMap.dataMap || {}
     const data = this.assinReportData(eventMap)
-    // #ifdef H5
     sendData(`${this.config.baseURL}/page`, data)
-    // #endif
-    // #ifndef H5
-    http.request({
-      baseURL: this.config.baseURL,
-      url: '/page',
-      method: 'POST',
-      data
-    })
-    // #endif
   }
 }
 

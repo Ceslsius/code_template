@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-01-12 11:19:10
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-08 14:58:03
+ * @LastEditTime: 2021-06-11 16:17:32
  */
 import { Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import store from '@/store'
@@ -82,6 +82,12 @@ class Store extends BaseModule {
   @Mutation
   setSign(isSign: boolean) {
     this.isSign = isSign
+  }
+  /**活动是否已结束 */
+  isEnd = false
+  @Mutation
+  setIsEnd(isEnd: any) {
+    this.isEnd = isEnd
   }
   /**
    * 初始化方法

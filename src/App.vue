@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2020-09-04 10:59:42
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-04-27 11:59:45
+ * @LastEditTime: 2021-06-11 16:17:14
 -->
 <template>
   <div>
@@ -11,18 +11,12 @@
       <div class="loadGif"></div>
       <div class="loadTxt">يۈكلىنىۋاتىدۇ، تەخىر قىلىڭ</div>
     </div>
-    <div
-      id="app"
-      :style="
-        titleShow
-          ? 'padding-top: 44px;padding-top: calc(constant(safe-area-inset-top) + 44px);padding-top: calc(env(safe-area-inset-top) + 44px);'
-          : 'padding-top: 0;'
-      "
-    >
+    <div class="end" v-if="isEnd">پائالىيەت ئاخىرلاشتى</div>
+    <div id="app" :class="titleShow ? 'app-con' : ''" v-else>
       <div class="title" v-if="titleShow">
         <div class="space"></div>
         <div class="backBtn" @click="backBtn"></div>
-        <div class="word">H5标题栏</div>
+        <div class="word">{{ $t(routeTitle) }}</div>
       </div>
       <router-view />
     </div>
@@ -57,6 +51,10 @@ export default class App extends Vue {
   // 页面未加载完成时展示遮罩层
   get loadMaskShow() {
     return StoreModule.loadMaskShow
+  }
+  // 是否活动已完成
+  get isEnd() {
+    return StoreModule.isEnd
   }
   /**
    * 返回按钮的点击事件，调用客户端WebView的返回方法
@@ -104,6 +102,19 @@ export default class App extends Vue {
     transform: translate(-50%, -50%);
   }
 }
+.end {
+  width: 100%;
+  font-size: 30px;
+  line-height: 100px;
+  font-weight: bold;
+  text-align: center;
+  color: orangered;
+}
+.app-con {
+  padding-top: 44px;
+  padding-top: calc(constant(safe-area-inset-top) + 44px);
+  padding-top: calc(env(safe-area-inset-top) + 44px);
+}
 #app {
   .title {
     position: fixed;
@@ -132,6 +143,15 @@ export default class App extends Vue {
       text-align: center;
       line-height: 44px;
       font-size: 20px;
+    }
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 1600px) {
+  #app {
+    width: 375px;
+    margin: 0 auto;
+    .title {
+      width: 375px;
     }
   }
 }

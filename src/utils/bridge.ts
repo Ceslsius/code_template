@@ -3,7 +3,7 @@
  * @Author: Zhang Yunzhong
  * @Date: 2021-02-07 14:44:58
  * @LastEditors: Zhang Yunzhong
- * @LastEditTime: 2021-05-14 14:40:44
+ * @LastEditTime: 2021-05-18 10:16:20
  */
 let connectWebViewJavascriptBridge: (callback: (bridge: Window['WebViewJavascriptBridge']) => void) => void
 if (window.location.href.indexOf('iOS') !== -1) {
@@ -253,4 +253,18 @@ export function callAppFunc_LoginInfo() {
  */
 export function callAppFunc_playAdVideo() {
   return callBridgeAsync('appFunc_playAdVideo', '') as Promise<any>
+}
+/**
+ * 查询任务完成情况
+ * @return data 播放回调参数
+ */
+export function callAppFunc_getSomeIntegralStatus(data: any) {
+  return callBridgeAsync('appFunc_getSomeIntegralStatus', data) as Promise<any>
+}
+/**
+ * 通知APP 刷新状态
+ * 1-绑定手机号,2-看片喜好,3-打开通讯录权限,4-定位权限
+ */
+export function callAppFunc_jumpNativeFunction(data: string) {
+  return callBridge('appFunc_jumpNativeFunction', data)
 }
